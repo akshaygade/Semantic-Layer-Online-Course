@@ -23,8 +23,7 @@ semantic_models:
           time_granularity: day
       - name: is_food_item
         type: categorical
-      - name: is_drink_item
-        type: categorical
+
     measures:
       - name: revenue
         description: The revenue generated for each order item. Revenue is calculated as a sum of revenue associated with each product in an order.
@@ -38,4 +37,15 @@ semantic_models:
         description: The revenue generated for each order item. Revenue is calculated as a sum of revenue associated with each product in an order.
         agg: sum
         expr: case when is_drink_item = 1 then product_price else 0 end
-
+      - name: order_item_count
+        agg: count_distinct
+        expr: order_id
+      
+metrics:
+#SIMPLE TYPE METRICS
+  - name: "order_item_count"
+    description: "Count of distinct orders"
+    label: "order_item_count"
+    type: simple
+    type_params:
+      measure: order_count
