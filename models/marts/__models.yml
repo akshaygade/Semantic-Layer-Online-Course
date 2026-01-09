@@ -69,3 +69,17 @@ models:
         description: A boolean indicating if this order included any food items.
       - name: is_drink_order
         description: A boolean indicating if this order included any drink items.
+
+    versions:
+      - v: 1
+      - v: 2
+        columns:
+          - name: order_price 
+            data_type: number
+          - include: all 
+            exclude: [order_cost]
+        config:
+            alias: fct_orders
+    config:
+          group: finance
+          access: public
